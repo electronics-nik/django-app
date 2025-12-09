@@ -1,3 +1,5 @@
+![Release](https://img.shields.io/github/v/release/electronics-nik/django-app.svg)
+
 # Django App
 
 #### generation a new secret key
