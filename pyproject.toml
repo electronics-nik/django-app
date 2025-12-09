@@ -1,0 +1,201 @@
+[project]
+name = "django-app"
+version = "0.0.1"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.2.8",
+    "psycopg2>=2.9.11",
+    "pydantic>=2.12.5",
+    "python-dotenv>=1.2.1",
+    "django-stubs>=5.2.7",
+    "django-stubs-ext>=5.2.7",
+]
+
+[dependency-groups]
+dev = [
+    "commitizen>=4.10.0",
+    "django-extensions>=4.1",
+    "djlint>=1.36.4",
+    "ipython>=9.7.0",
+    "mypy[reports]>=1.15.0,<2",
+    "pre-commit>=4.5.0",
+    "pylint>=4.0.3",
+    "pytest>=9.0.1",
+    "pytest-cov>=7.0.0",
+    "pytest-split>=0.2.0",
+    "ruff>=0.14.7",
+]
+
+[tool.uv]
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
+
+[tool.hatch.build.targets.sdist]
+include = ["src"]
+
+[tool.hatch.build.targets.wheel]
+include = ["src"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+bump_message = "bump: $current_version -> $new_version"
+version_provider = "uv"
+version_files = [
+    "src/__version__.py",
+    "__variables__.yml"
+]
+style = [
+    ["qmark", "fg:#ff9d00 bold"],
+    ["question", "bold"],
+    ["answer", "fg:#ff9d00 bold"],
+    ["pointer", "fg:#ff9d00 bold"],
+    ["highlighted", "fg:#ff9d00 bold"],
+    ["selected", "fg:#cc5454"],
+    ["separator", "fg:#cc5454"],
+    ["instruction", ""],
+    ["text", ""],
+    ["disabled", "fg:#858585 italic"]
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = [
+    "tests/unit",
+]
+addopts = "--strict-markers"
+log_cli = 1
+log_cli_level = "INFO"
+log_cli_format = "[pytest] %(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+
+[tool.coverage.report]
+exclude_also = [
+    # Have to re-enable the standard pragma
+    'pragma: no cover',
+    # Don't complain about missing debug-only code:
+    'def __repr__',
+    'if self\.debug',
+    # Don't complain if tests don't hit defensive assertion code:
+    'raise AssertionError',
+    'raise NotImplementedError',
+    # Don't complain if non-runnable code isn't run:
+    'if 0:',
+    'if __name__ == .__main__.:'
+]
+omit = [
+]
+
+[tool.coverage.run]
+include = [
+    "src/*",
+]
+
+[tool.coverage.html]
+directory = "reports"
+
+[tool.pylint.master]
+persistent = "yes"
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-docstring",
+    "broad-except",
+    "no-else-return",
+    "too-few-public-methods",
+    "invalid-name",
+    "fixme",
+]
+extension-pkg-whitelist = "pydantic"
+
+[tool.pylint.reports]
+output-format = "colorized"
+score = "no"
+never-returning-functions = "optparse.Values,sys.exit"
+
+[tool.pylint.format]
+max-line-length = 120
+min-similarity-lines = 10
+
+[tool.pylint.design]
+max-args = 6
+min-public-methods = 1
+
+[tool.pylint.exceptions]
+overgeneral-exceptions = "builtins.Exception"
+
+[tool.djlint]
+profile = "django"
+max-line-length = 120
+indent = 4
+ignore = "H006,H013"
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+# Same as Black.
+line-length = 120
+indent-width = 4
+
+# Assume Python 3.8
+target-version = "py38"
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+select = ["E4", "E7", "E9", "F"]
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"

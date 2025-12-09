@@ -1,0 +1,47 @@
+default_install_hook_types: [pre-commit,pre-push,commit-msg]
+default_stages: [pre-commit]
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: end-of-file-fixer
+        exclude: .test_durations
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+        exclude: '.vscode/'
+
+  - repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.36.4
+    hooks:
+      - id: djlint
+
+  - repo: local
+    hooks:
+      - id: commitizen
+        name: commitizen
+        stages: [commit-msg]
+        language: system
+        entry: uv run cz check --commit-msg-file
+
+      - id: lint-ruff
+        name: lint-ruff
+        stages: [pre-commit]
+        language: system
+        entry: make ruff
+        types: [python]
+
+      - id: lint-pylint
+        name: lint-pylint
+        stages: [pre-push]
+        language: system
+        entry: make pylint
+        types: [python]
+
+      - id: format-ruff
+        name: format-ruff
+        stages: [pre-commit]
+        language: system
+        entry: uv run ruff format .
+        types: [python]

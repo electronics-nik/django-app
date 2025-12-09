@@ -1,0 +1,53 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+*.egg-info/
+build
+dist
+
+# Unit test / coverage reports
+.coverage
+.coverage*
+coverage.xml
+junit/*
+htmlcov/*
+mypy-reports/
+pytestjunit.xml
+.local/
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+
+# Idea
+.idea/
+*.iml
+
+# MacOS
+.DS_Store
+
+# Databricks eXtensions
+.dbx/lock.json
+
+# local mlflow files
+mlruns/
+
+# Poetry build generated files
+poetry-requirements.txt
+
+.databricks/
+build/
+dist/
+*.egg-info
+.venv/
+../scratch/**
+!../scratch/README.md
+
+# Local env variables
+.env
+
+# sqlite DB
+src/*.sqlite3
