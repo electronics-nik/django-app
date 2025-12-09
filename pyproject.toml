@@ -4,12 +4,11 @@ version = "0.0.3"
 description = "Add your description here"
 requires-python = ">=3.12"
 dependencies = [
-    "django>=5.2.8",
+    "django>=6.0rc1",
     "psycopg2>=2.9.11",
     "pydantic>=2.12.5",
+    "pytest-split>=0.2.0",
     "python-dotenv>=1.2.1",
-    "django-stubs>=5.2.7",
-    "django-stubs-ext>=5.2.7",
 ]
 
 [dependency-groups]
@@ -17,14 +16,13 @@ dev = [
     "commitizen>=4.10.0",
     "django-extensions>=4.1",
     "djlint>=1.36.4",
-    "ipython>=9.7.0",
-    "mypy[reports]>=1.15.0,<2",
+    "ipython>=9.8.0",
     "pre-commit>=4.5.0",
-    "pylint>=4.0.3",
-    "pytest>=9.0.1",
+    "pylint>=4.0.4",
+    "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
     "pytest-split>=0.2.0",
-    "ruff>=0.14.7",
+    "ruff>=0.14.8",
 ]
 
 [tool.uv]
